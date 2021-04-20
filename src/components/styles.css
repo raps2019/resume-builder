@@ -234,7 +234,7 @@ html, body, div, h1, h2, h3, h4, h5, h6, p, input, label, button, li
 }
 
 .cv__header {
-  background-color: #ffee00;
+  background-color: red;
   height: 50mm;
   display: grid;
   grid-template-columns: 50% 50%;
