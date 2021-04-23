@@ -28,7 +28,7 @@ class Main extends Component {
 //Handlers for Personal Details Form
 
   handlePersonalDetailsChange = (input, event) => {
-    const personalDetailsCopy =  this.state.personalDetails.slice();
+    const personalDetailsCopy =  {...this.state.personalDetails};
     personalDetailsCopy[input] = event.target.value
     this.setState({
      personalDetails: personalDetailsCopy,
