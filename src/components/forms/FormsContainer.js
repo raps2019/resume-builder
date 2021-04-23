@@ -16,6 +16,7 @@ function FormsContainer(props) {
         handleWorkExperienceChange={props.handleWorkExperienceChange}
         handleDeleteWorkExperience={props.handleDeleteWorkExperience}
         handleShowWorkExperience={props.handleShowWorkExperience}
+        handleWorkExperienceToPresent={props.handleWorkExperienceToPresent}
       />
       <Education 
         education={props.education}
@@ -23,6 +24,7 @@ function FormsContainer(props) {
         handleAddEducation={props.handleAddEducation}
         handleDeleteEducation={props.handleDeleteEducation}
         handleShowEducation={props.handleShowEducation}
+        handleEducationToPresent={props.handleEducationToPresent}
       />
     </div>
   )

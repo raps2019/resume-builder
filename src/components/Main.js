@@ -28,17 +28,17 @@ class Main extends Component {
 //Handlers for Personal Details Form
 
   handlePersonalDetailsChange = (input, event) => {
-    const personalDetailsCopy =  this.state.personalDetails;
+    const personalDetailsCopy =  this.state.personalDetails.slice();
     personalDetailsCopy[input] = event.target.value
     this.setState({
      personalDetails: personalDetailsCopy,
-    }, () => console.log(this.state.personalDetails))
+    })
   }
 
   //Handlers for Work Experience Form
 
   handleWorkExperienceChange = (input, id, event) => {
-    const workExperienceCopy = this.state.workExperience;
+    const workExperienceCopy = this.state.workExperience.slice();
     const workExperienceItem = workExperienceCopy.find((item) => item.id === id);
     workExperienceItem[input] = event.target.value;
     this.setState({
@@ -58,6 +58,7 @@ class Main extends Component {
         employer: '',
         startDate: '',
         endDate: '',
+        toPresent: false,
         city:'',
         country:'',
         description: '',
@@ -66,7 +67,7 @@ class Main extends Component {
   }
 
   handleDeleteWorkExperience = (id) => {
-    const workExperienceCopy = this.state.workExperience;
+    const workExperienceCopy = this.state.workExperience.slice();
     const filteredWorkExperience = workExperienceCopy.filter((item) => item.id !== id);
     this.setState({
       workExperience: filteredWorkExperience,
@@ -74,17 +75,27 @@ class Main extends Component {
   }
 
   handleShowWorkExperience = (id) => {
-    const workExperienceCopy = this.state.workExperience;
+    const workExperienceCopy = this.state.workExperience.slice();
     const workExperienceItem = workExperienceCopy.find((item) => item.id === id)
     workExperienceItem.show = !workExperienceItem.show
     this.setState({
       workExperience: workExperienceCopy,
-    }, () => console.log(this.state.workExperience))
+    })
+  }
+
+  handleWorkExperienceToPresent = (id) => {
+    const workExperienceCopy = this.state.workExperience.slice();
+    const workExperienceItem = workExperienceCopy.find((item) => item.id === id)
+    workExperienceItem.toPresent = !workExperienceItem.toPresent
+    workExperienceItem.endDate = Date.now();
+    this.setState({
+      workExperience: workExperienceCopy,
+    })
   }
 
   //Handlers for Eductation Details Form
   handleEducationChange = (input, id, event) => {
-    const educationCopy = this.state.education;
+    const educationCopy = this.state.education.slice();
     const educationItem = educationCopy.find((item) => item.id === id);
     educationItem[input] = event.target.value;
     this.setState({
@@ -101,6 +112,7 @@ class Main extends Component {
         degree: '',
         startDate: '',
         endDate: '',
+        toPresent: false,
         city:'',
         country:'',
         description: '',
@@ -109,8 +121,7 @@ class Main extends Component {
   }
 
   handleDeleteEducation = (id) => {
-    console.log('handleDeleteEducation')
-    const educationCopy = this.state.education;
+    const educationCopy = this.state.education.slice();
     const filteredEducation = educationCopy.filter(item => item.id !== id);
     this.setState({
       education: filteredEducation,
@@ -118,14 +129,23 @@ class Main extends Component {
   }
 
   handleShowEducation = (id) => {
-    console.log('handleShowEducation')
-    const educationCopy = this.state.education;
+    const educationCopy = this.state.education.slice();
     const educationItem = educationCopy.find((item) => item.id === id);
     educationItem.show = !educationItem.show
     this.setState({
       education: educationCopy,
     })
   }
+
+  handleEducationToPresent = (id) => {
+  const educationCopy = this.state.education.slice();
+  const educationItem = educationCopy.find((item) => item.id === id)
+  educationItem.toPresent = !educationItem.toPresent
+  educationItem.endDate = Date.now();
+  this.setState({
+    education: educationCopy,
+  })
+}
   
   render() {
     return (
@@ -138,11 +158,13 @@ class Main extends Component {
           handleWorkExperienceChange={this.handleWorkExperienceChange}
           handleDeleteWorkExperience={this.handleDeleteWorkExperience}
           handleShowWorkExperience={this.handleShowWorkExperience}
+          handleWorkExperienceToPresent={this.handleWorkExperienceToPresent}
           education={this.state.education}
           handleEducationChange={this.handleEducationChange}
           handleAddEducation={this.handleAddEducation}
           handleDeleteEducation={this.handleDeleteEducation}
           handleShowEducation={this.handleShowEducation}
+          handleEducationToPresent={this.handleEducationToPresent}
         />
         <PreviewContainer 
           personalDetails={this.state.personalDetails}

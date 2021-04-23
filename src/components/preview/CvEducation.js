@@ -23,10 +23,13 @@ function CvEducation(props) {
     const month = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
 
     if (item.startDate && item.endDate) {
-    const startDate = new Date(item.startDate);
-    const endDate = new Date(item.endDate)
-
-    return (`${month[startDate.getMonth()]} ${startDate.getFullYear()} - ${month[endDate.getMonth()]} ${endDate.getFullYear()}`)
+      const startDate = new Date(item.startDate);
+      if (item.toPresent !== true) {
+        const endDate = new Date(item.endDate)
+        return (`${month[startDate.getMonth()]} ${startDate.getFullYear()} - ${month[endDate.getMonth()]} ${endDate.getFullYear()}`)
+      } else {
+        return (`${month[startDate.getMonth()]} ${startDate.getFullYear()} - PRESENT`)
+      }
     }
   }  
   

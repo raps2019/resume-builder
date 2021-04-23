@@ -8,6 +8,7 @@ function WorkExperience(props) {
     handleWorkExperienceChange,
     handleDeleteWorkExperience,
     handleShowWorkExperience,
+    handleWorkExperienceToPresent,
   } = props;
 
   const workExperienceList = workExperience.map((item) => 
@@ -48,16 +49,30 @@ function WorkExperience(props) {
           </input>
           <label className='input__label'>Start Date</label>
         </div>
-        <div className='container__input'>
-          <input
-            type='date'
-            value={item.endDate}
-            className='input'
-            onChange={(e) => handleWorkExperienceChange('endDate', item.id, e)}
-            required>
-          </input>
-          <label className='input__label'>End Date</label>
+
+        <div className='container__input--end-date'>
+          <div className='container__input'>
+            <input
+              type='date'
+              value={item.endDate}
+              className={item.toPresent === false ? `input` : `input input--inactive`}
+              onChange={(e) => handleWorkExperienceChange('endDate', item.id, e)}
+              required>
+            </input>
+            <label className='input__label'>
+            {item.toPresent===false ? 
+            'End Date' :
+            'To Present'}
+            </label>
+          </div>
+          <button 
+            className={item.toPresent === false ? "button__toggle button__toggle--off" : "button__toggle button__toggle--on"}
+            onClick={(e) => handleWorkExperienceToPresent(item.id)}
+            >Present
+          </button> 
         </div>
+      
+        
         <div className='container__input'>
           <input
             type='text'

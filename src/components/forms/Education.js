@@ -8,6 +8,7 @@ const {
   handleAddEducation,
   handleDeleteEducation,
   handleShowEducation,  
+  handleEducationToPresent,
 } = props
 
 const educationList = education.map((item) => 
@@ -49,16 +50,30 @@ item.show === true ?
         </input>
         <label className='input__label'>Start Date</label>
       </div>
-      <div className='container__input'>
-        <input
-          type='date'
-          value={item.endDate}
-          className='input'
-          onChange={(e) => handleEducationChange('endDate', item.id, e)}
-          required>
-        </input>
-        <label className='input__label'>End Date</label>
+
+      <div className='container__input--end-date'>
+        <div className='container__input'>
+          <input
+            type='date'
+            value={item.endDate}
+            className={item.toPresent === false ? `input` : `input input--inactive`}
+            onChange={(e) => handleEducationChange('endDate', item.id, e)}
+            required>
+          </input>
+          <label className='input__label'>
+          {item.toPresent===false ? 
+          'End Date' :
+          'To Present'}
+          </label>
+        </div>
+        <button 
+          className={item.toPresent === false ? "button__toggle button__toggle--off" : "button__toggle button__toggle--on"}
+          onClick={(e) => handleEducationToPresent(item.id)}
+          >Present
+        </button> 
       </div>
+
+
       <div className='container__input'>
         <input
           type='text'

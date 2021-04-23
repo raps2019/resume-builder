@@ -24,16 +24,19 @@ function CvWorkExperience(props) {
 
     if (item.startDate && item.endDate) {
     const startDate = new Date(item.startDate);
-    const endDate = new Date(item.endDate)
-
-    return (`${month[startDate.getMonth()]} ${startDate.getFullYear()} - ${month[endDate.getMonth()]} ${endDate.getFullYear()}`)
+    
+    if (item.toPresent !== true) {
+      const endDate = new Date(item.endDate)
+      return (`${month[startDate.getMonth()]} ${startDate.getFullYear()} - ${month[endDate.getMonth()]} ${endDate.getFullYear()}`)
+    } else {
+      return (`${month[startDate.getMonth()]} ${startDate.getFullYear()} - PRESENT`)
+    }
     }
   }  
 
   const description = (item) => {
     const text = item.description
     const lines = text.split('\n')
-    console.log(lines)
 
     const description = lines.map((line, index) => <li 
     key={index} 
