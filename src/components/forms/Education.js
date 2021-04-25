@@ -56,7 +56,8 @@ item.show === true ?
           <input
             type='date'
             value={item.endDate}
-            className={item.toPresent === false ? `input` : `input input--inactive`}
+            className='input'
+            disabled={item.toPresent === true ? `disabled` : null}
             onChange={(e) => handleEducationChange('endDate', item.id, e)}
             required>
           </input>

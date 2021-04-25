@@ -55,7 +55,6 @@ function WorkExperience(props) {
             <input
               type='date'
               value={item.endDate}
-              className={item.toPresent === false ? `input` : `input input--inactive`}
               onChange={(e) => handleWorkExperienceChange('endDate', item.id, e)}
               required>
             </input>
