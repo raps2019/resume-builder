@@ -55,6 +55,8 @@ function WorkExperience(props) {
             <input
               type='date'
               value={item.endDate}
+              className='input'
+              disabled={item.toPresent === true ? `disabled` : null}
               onChange={(e) => handleWorkExperienceChange('endDate', item.id, e)}
               required>
             </input>
