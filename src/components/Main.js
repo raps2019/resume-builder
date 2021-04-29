@@ -29,8 +29,8 @@ function Main() {
   //Handlers for Work Experience Form
 
   const handleAddWorkExperience = (e) => {
-    setWorkExperience( prevState => (
-      [
+    setWorkExperience( prevState => 
+      ([
         {
           id: Date.now().toString(),
           show: true,
@@ -44,8 +44,8 @@ function Main() {
           description: '',
         },
         ...prevState.sort((a, b) => new Date(b.endDate) - new Date(a.endDate))
-      ]
-    ))
+      ])
+    )
   }
 
   const handleWorkExperienceChange = (input, id, event) => {
@@ -77,21 +77,18 @@ function Main() {
   const handleWorkExperienceToPresent = (id) => {
     setWorkExperience(
       workExperience.map( (item) => {
-        if (item.id === id) 
-        {
+        if (item.id === id) {
           item.toPresent = !item.toPresent;
-          if (item.toPresent === true) {
-            item.endDate = Date.now();
-          } else {
-            item.endDate = ''
-          }
-          return item
-        } else {
-          return item
-        }
+          (
+            item.toPresent === true
+            ? item.endDate = Date.now()
+            : item.endDate = ''
+          )
+        } 
+        return item
       })
     )
-   }  
+  }  
 
   //Handlers for Eductation Details Form
 
