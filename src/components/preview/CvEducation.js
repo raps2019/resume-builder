@@ -22,6 +22,10 @@ function CvEducation(props) {
   const dateRange = (item) => {
     const month = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
 
+    if (item.toPresent === true) {
+      return (`${item.startDate} - PRESENT`)
+    }
+
     if (item.startDate && item.endDate) {
       const startDate = new Date(item.startDate);
       if (item.toPresent !== true) {
@@ -32,11 +36,11 @@ function CvEducation(props) {
       }
     }
   }  
+
   
   const description = (item) => {
     const text = item.description
     const lines = text.split('\n')
-    console.log(lines)
 
     const description = lines.map((line, index) => <li 
     key={index} 

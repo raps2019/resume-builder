@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect} from 'react'
 import FormsContainer from './forms/FormsContainer'
 import PreviewContainer from './preview/PreviewContainer'
 import './styles.css'
@@ -113,32 +113,54 @@ function Main() {
   }
 
   const handleEducationChange = (input, id, event) => {
-    const educationCopy = education.slice();
-    const educationItem = educationCopy.find((item) => item.id === id);
-    educationItem[input] = event.target.value;
-    setEducation(educationCopy)
+    setEducation(
+      education.map( item => 
+        item.id === id
+        ? {...item, [input]: event.target.value}
+        : item
+      )
+    )
   }
 
   const handleDeleteEducation = (id) => {
-    const educationCopy = education.slice();
-    const filteredEducation = educationCopy.filter(item => item.id !== id);
-    setEducation(filteredEducation)
+    setEducation(
+      education.filter( item => item.id !== id)
+    )
   }
 
   const handleShowEducation = (id) => {
-    const educationCopy = education.slice();
-    const educationItem = educationCopy.find((item) => item.id === id);
-    educationItem.show = !educationItem.show
-    setEducation(educationCopy)
+    setEducation(
+      education.map( item => 
+        item.id === id
+        ? {...item, show: !item.show}
+        : item
+      )
+    )
   }
       
   const handleEducationToPresent = (id) => {
-    const educationCopy = education.slice();
-    const educationItem = educationCopy.find((item) => item.id === id)
-    educationItem.toPresent = !educationItem.toPresent
-    educationItem.endDate = Date.now();
-    setEducation(educationCopy)
-  }
+    setEducation(
+      education.map( (item) => {
+        if (item.id === id) {
+          item.toPresent = !item.toPresent;
+          (
+            item.toPresent === true
+            ? item.endDate = Date.now()
+            : item.endDate = ''
+          )
+        } 
+        return item
+      })
+    )
+  }  
+
+  useEffect(() => {
+    if (education[0]) {
+      console.log(`End Date : ${education[0].endDate}`) 
+      console.log(`Start Date : ${education[0].startDate}`) 
+      console.log(`To Present : ${education[0].toPresent}`) 
+    }
+  }, [education])
 
   return (
     <div className="container__main">
